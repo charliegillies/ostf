@@ -1,4 +1,5 @@
 #include "core/Event.h"
+#include "core/EventRegister.h"
 
 int main()
 {

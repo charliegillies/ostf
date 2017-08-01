@@ -112,6 +112,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="core\Buffer.h" />
+    <ClInclude Include="core\Config.h" />
+    <ClInclude Include="core\EventRegister.h" />
     <ClInclude Include="core\Peer.h" />
     <ClInclude Include="core\Event.h" />
   </ItemGroup>
