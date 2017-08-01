@@ -51,7 +51,7 @@ namespace ostf
 		void declare() {
 			// ensure that 'E' inherits from Event
 			static_assert(std::is_base_of<Event, E>::value, 
-				"EventRegister.declare() can only take template types that inherit from Event.");
+				"EventRegister.declare<E>() can only take template types that inherit from ostf::Event.");
 
 			// create the generator and pop it into the map
 			//EventGenerator<E>* generator = new EventGenerator<E>();
