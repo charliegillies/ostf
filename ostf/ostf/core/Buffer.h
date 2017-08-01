@@ -9,6 +9,7 @@ namespace ostf
 	*/
 	class Buffer
 	{
+	public:
 		virtual void write_int(std::string m, int v) = 0;
 
 		virtual void read_int(std::string m, int& v) = 0;
