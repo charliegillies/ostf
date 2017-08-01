@@ -38,6 +38,15 @@ namespace ostf
 		std::map<std::string, BaseEventGenerator*> _generators;
 
 	public:
+		EventRegister() { }
+
+		~EventRegister() {
+			// delete everything in the _generators map
+			for(auto pair : _generators) {
+				delete pair.second;
+			}
+		}
+
 		template<class E>
 		void declare() {
 			// ensure that 'E' inherits from Event
@@ -45,7 +54,7 @@ namespace ostf
 				"EventRegister.declare() can only take template types that inherit from Event.");
 
 			// create the generator and pop it into the map
-			EventGenerator<E>* generator = new EventGenerator<E>();
+			//EventGenerator<E>* generator = new EventGenerator<E>();
 			
 		}
 	};
