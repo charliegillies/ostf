@@ -30,9 +30,24 @@
     <ClInclude Include="core\EventRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\JsonBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="events\CreateLobbyEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\JsonBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="events\CreateLobbyEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

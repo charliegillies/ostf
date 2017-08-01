@@ -55,7 +55,7 @@ namespace ostf
 
 			// create the generator and pop it into the map
 			//EventGenerator<E>* generator = new EventGenerator<E>();
-			
+
 		}
 	};
 }
