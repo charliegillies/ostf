@@ -111,7 +111,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="events\Event.h" />
+    <ClInclude Include="core\Buffer.h" />
+    <ClInclude Include="core\Peer.h" />
+    <ClInclude Include="core\Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />

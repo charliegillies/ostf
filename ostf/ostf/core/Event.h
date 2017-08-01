@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/Buffer.h"
+#include "Buffer.h"
 
 namespace ostf
 {
