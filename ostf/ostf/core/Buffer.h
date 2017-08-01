@@ -28,5 +28,11 @@ namespace ostf
 		virtual void write_string(std::string m, std::string& v) = 0;
 
 		virtual void read_string(std::string m, std::string& value) = 0;
+
+
+		Buffer& create_child(std::string c);
+
+		Buffer& read_child(std::string c);
+
 	};
 }
