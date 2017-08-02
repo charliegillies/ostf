@@ -76,15 +76,17 @@ namespace ostf
 			If the id is not recognised or cannot be generated
 			then nullptr will be returned.
 		*/
-		Event* generate(ostf::Buffer& buffer) {
+		Event* createEvent(ostf::Buffer& buffer) {
 			// get the base event generator using the id
 			std::string id;
 			buffer.read_string("id", id);
 			BaseEventGenerator* generator = _generators[id];
 		
+			// ensure generator exists, if not - return nullptr
 			if (generator == nullptr)
 				return nullptr;
 
+			// use the event generator to create the event
 			return generator->generate(buffer);
 		}
 	};

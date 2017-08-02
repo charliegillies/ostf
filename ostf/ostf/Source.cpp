@@ -25,7 +25,7 @@ Event* eventFromString(std::string v, EventRegister& reg)
 	JsonBuffer buffer{ json };
 
 	// use the event register to parse the event
-	Event* parsed = reg.generate(buffer);
+	Event* parsed = reg.createEvent(buffer);
 	// ensure the event was parsed properly
 	assert(parsed != nullptr);
 
@@ -47,7 +47,7 @@ int main()
 
 	// reform the event from the json string
 	Event* e = eventFromString(j, evRegister);
-	CreateLobbyEvent* parsedLobbyEvent = (CreateLobbyEvent*)e;
+	CreateLobbyEvent* parsedLobbyEvent = static_cast<CreateLobbyEvent*>(e);
 
 	system("pause");
 
