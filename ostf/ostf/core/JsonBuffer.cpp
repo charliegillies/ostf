@@ -57,7 +57,17 @@ ostf::Buffer & ostf::JsonBuffer::read_child(std::string c)
 {
 	// get buf, ensure that it isn't null
 	JsonBuffer* buf = _buffer[c];
-	assert(buf != nullptr);
+
+	// if buf is null, check if we have a child in the json buffer
+	if (buf == nullptr) {
+		if (!_jsonBuffer[c].is_null()) {
+			// we have a child in the json buffer, create one to match
+			buf = new JsonBuffer(_jsonBuffer[c]);
+			_buffer[c] = buf;
+		}
+		else
+			throw std::invalid_argument("JsonBuffer::read_child(c) was called, but the child did not exist.");
+	}
 
 	return *buf;
 }

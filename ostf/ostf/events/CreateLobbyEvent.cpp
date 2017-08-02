@@ -23,5 +23,8 @@ void ostf::CreateLobbyEvent::write(ostf::Buffer & out)
 
 void ostf::CreateLobbyEvent::read(ostf::Buffer & in)
 {
-
+	Buffer& settings = in.read_child("settings");
+	settings.read_int("maxPlayers", lobbySettings.maxPlayers);
+	settings.read_string("name", lobbySettings.name);
+	settings.read_string("password", lobbySettings.password);
 }
