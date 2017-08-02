@@ -1,5 +1,6 @@
 #include "core/Event.h"
 #include "core/EventRegister.h"
+#include "core/EventListener.h"
 #include "core/Buffer.h"
 #include "core/JsonBuffer.h"
 
@@ -38,6 +39,11 @@ int main()
 	EventRegister evRegister;
 	evRegister.declare<CreateLobbyEvent>();
 
+	EventListener evListener;
+	evListener.listen<CreateLobbyEvent>([] (CreateLobbyEvent* e) {
+		std::cout << "Create Lobby Event Recv'd" << std::endl;
+	});
+
 	// create a lobby event, convert it to a json string
 	CreateLobbyEvent createLobbyEvent;
 	std::string j = eventToString(createLobbyEvent);
@@ -47,10 +53,12 @@ int main()
 
 	// reform the event from the json string
 	Event* e = eventFromString(j, evRegister);
-	CreateLobbyEvent* parsedLobbyEvent = static_cast<CreateLobbyEvent*>(e);
+	
+	// inform the listener that we've got an event
+	evListener.onEventRecv(e);
 
 	system("pause");
 
-	delete parsedLobbyEvent;
+	delete e;
 	return 0;
 }

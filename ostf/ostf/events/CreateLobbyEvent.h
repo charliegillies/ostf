@@ -27,5 +27,6 @@ namespace ostf
 		// Inherited via Event
 		virtual void write(Buffer & out) override;
 		virtual void read(Buffer & in) override;
+		virtual std::string getId() override;
 	};
 }

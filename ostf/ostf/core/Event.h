@@ -24,5 +24,10 @@ namespace ostf
 			Reads the event data.
 		*/
 		virtual void read(Buffer& in) = 0;
+
+		/*
+			Gets the id of the event.
+		*/
+		virtual std::string getId() = 0;
 	};
 }

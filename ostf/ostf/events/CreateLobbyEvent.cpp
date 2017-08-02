@@ -28,3 +28,8 @@ void ostf::CreateLobbyEvent::read(ostf::Buffer & in)
 	settings.read_string("name", lobbySettings.name);
 	settings.read_string("password", lobbySettings.password);
 }
+
+std::string ostf::CreateLobbyEvent::getId()
+{
+	return id;
+}
