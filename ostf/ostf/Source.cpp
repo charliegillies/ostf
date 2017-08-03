@@ -33,16 +33,24 @@ Event* eventFromString(std::string v, EventRegister& reg)
 	return parsed;
 }
 
+void onCreateLobbyEvent(CreateLobbyEvent* e)
+{
+	std::cout << "again!" << std::endl;
+}
+
 int main()
 {
 	// create an event register, declare our events
 	EventRegister evRegister;
 	evRegister.declare<CreateLobbyEvent>();
 
+	// create a listener, start listening
 	EventListener evListener;
-	evListener.listen<CreateLobbyEvent>([] (CreateLobbyEvent* e) {
-		std::cout << "Create Lobby Event Recv'd" << std::endl;
-	});
+//	evListener.listen<CreateLobbyEvent>([] (CreateLobbyEvent* e) {
+//		std::cout << "Create Lobby Event Recv'd" << std::endl;
+//	});
+
+//	evListener.listen<CreateLobbyEvent>(onCreateLobbyEvent);
 
 	// create a lobby event, convert it to a json string
 	CreateLobbyEvent createLobbyEvent;

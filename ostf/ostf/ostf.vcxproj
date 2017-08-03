@@ -112,17 +112,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="core\Buffer.h" />
-    <ClInclude Include="core\Config.h" />
     <ClInclude Include="core\EventListener.h" />
     <ClInclude Include="core\EventRegister.h" />
     <ClInclude Include="core\json.hpp" />
     <ClInclude Include="core\JsonBuffer.h" />
-    <ClInclude Include="core\Peer.h" />
+    <ClInclude Include="core\net\Peer.h" />
     <ClInclude Include="core\Event.h" />
     <ClInclude Include="events\CreateLobbyEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\JsonBuffer.cpp" />
+    <ClCompile Include="core\net\Peer.cpp" />
     <ClCompile Include="events\CreateLobbyEvent.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
