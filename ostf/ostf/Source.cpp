@@ -38,6 +38,12 @@ void onCreateLobbyEvent(CreateLobbyEvent* e)
 	std::cout << "again!" << std::endl;
 }
 
+struct LobbyCreatedExample {
+	void onLobbyCreated(CreateLobbyEvent* e) {
+		std::cout << "LobbyCreatedExample.onLobbyCreated()" << std::endl;
+	}
+};
+
 int main()
 {
 	// create an event register, declare our events
@@ -46,11 +52,20 @@ int main()
 
 	// create a listener, start listening
 	EventListener evListener;
+
+	// Lambda function
 //	evListener.listen<CreateLobbyEvent>([] (CreateLobbyEvent* e) {
 //		std::cout << "Create Lobby Event Recv'd" << std::endl;
 //	});
 
+	// Global/Free function
 //	evListener.listen<CreateLobbyEvent>(onCreateLobbyEvent);
+
+	// Member function
+	LobbyCreatedExample ex;
+	std::function<void(CreateLobbyEvent*)> callback = std::bind(
+		&LobbyCreatedExample::onLobbyCreated, &ex, std::placeholders::_1);
+	evListener.listen<CreateLobbyEvent>(callback);
 
 	// create a lobby event, convert it to a json string
 	CreateLobbyEvent createLobbyEvent;
