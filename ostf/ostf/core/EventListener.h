@@ -54,6 +54,10 @@ namespace ostf
 
 		template<class E>
 		void listen(std::function<void (E*)> f) {
+			if (f == NULL) {
+				throw std::invalid_argument("EventListener.listen() std::function param cannot be null.");
+			}
+
 			std::string key = E::id;
 
 			// check if we have a listener already 

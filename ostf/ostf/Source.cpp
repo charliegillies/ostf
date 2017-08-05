@@ -1,4 +1,5 @@
 #include "core/Event.h"
+#include "core/EventSerializer.h"
 #include "core/EventRegister.h"
 #include "core/EventListener.h"
 #include "core/Buffer.h"
@@ -10,32 +11,7 @@
 
 using namespace ostf;
 
-
-std::string eventToString(Event& e)
-{
-	nlohmann::json json;
-	JsonBuffer buffer{ json };
-
-	e.write(buffer);
-	return json.dump(4);
-}
-
-Event* eventFromString(std::string v, EventRegister& reg)
-{
-	// parse string to a json object, create buffer
-	nlohmann::json json = nlohmann::json::parse(v);
-	JsonBuffer buffer{ json };
-
-	// use the event register to parse the event
-	Event* parsed = reg.createEvent(buffer);
-	// ensure the event was parsed properly
-	assert(parsed != nullptr);
-
-	return parsed;
-}
-
-void onCreateLobbyEvent(CreateLobbyEvent* e)
-{
+void onCreateLobbyEvent(CreateLobbyEvent* e) {
 	std::cout << "onCreateLobbyEvent()" << std::endl;
 }
 
@@ -51,6 +27,9 @@ int main()
 	EventRegister evRegister;
 	evRegister.declare<CreateLobbyEvent>();
 
+	// Initialize the event serializer with our event register
+	EventSerializer::init(&evRegister);
+
 	// create a listener, start listening
 	EventListener evListener;
 	std::function<void(CreateLobbyEvent*)> callback;
@@ -64,21 +43,21 @@ int main()
 //	callback = onCreateLobbyEvent;
 
 	// Member function
-//	LobbyCreatedExample ex;
-//	callback = std::bind(&LobbyCreatedExample::onLobbyCreated, &ex, std::placeholders::_1);
+	LobbyCreatedExample ex;
+	callback = std::bind(&LobbyCreatedExample::onLobbyCreated, &ex, std::placeholders::_1);
 
 	// begin listening
 	evListener.listen<CreateLobbyEvent>(callback);
 
 	// create a lobby event, convert it to a json string
 	CreateLobbyEvent createLobbyEvent;
-	std::string data = eventToString(createLobbyEvent);
+	std::string data = EventSerializer::serialize(&createLobbyEvent);
 
 	// debug print the json string
 	std::cout << data << std::endl;
 
 	// reform the event from the json string
-	Event* e = eventFromString(data, evRegister);
+	Event* e = EventSerializer::deserialize(data);
 	
 	// inform the listener that we've got an event
 	evListener.onEventRecv(e);
