@@ -10,6 +10,7 @@
 
 using namespace ostf;
 
+
 std::string eventToString(Event& e)
 {
 	nlohmann::json json;
@@ -35,7 +36,7 @@ Event* eventFromString(std::string v, EventRegister& reg)
 
 void onCreateLobbyEvent(CreateLobbyEvent* e)
 {
-	std::cout << "again!" << std::endl;
+	std::cout << "onCreateLobbyEvent()" << std::endl;
 }
 
 struct LobbyCreatedExample {
@@ -52,19 +53,21 @@ int main()
 
 	// create a listener, start listening
 	EventListener evListener;
+	std::function<void(CreateLobbyEvent*)> callback;
 
 	// Lambda function
-//	evListener.listen<CreateLobbyEvent>([] (CreateLobbyEvent* e) {
-//		std::cout << "Create Lobby Event Recv'd" << std::endl;
-//	});
+//	callback = [](CreateLobbyEvent* e) {
+//		std::cout << "Lambda invoked" << std::endl;
+//	};
 
 	// Global/Free function
-//	evListener.listen<CreateLobbyEvent>(onCreateLobbyEvent);
+//	callback = onCreateLobbyEvent;
 
 	// Member function
-	LobbyCreatedExample ex;
-	std::function<void(CreateLobbyEvent*)> callback = std::bind(
-		&LobbyCreatedExample::onLobbyCreated, &ex, std::placeholders::_1);
+//	LobbyCreatedExample ex;
+//	callback = std::bind(&LobbyCreatedExample::onLobbyCreated, &ex, std::placeholders::_1);
+
+	// begin listening
 	evListener.listen<CreateLobbyEvent>(callback);
 
 	// create a lobby event, convert it to a json string
