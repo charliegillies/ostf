@@ -72,13 +72,13 @@ int main()
 
 	// create a lobby event, convert it to a json string
 	CreateLobbyEvent createLobbyEvent;
-	std::string j = eventToString(createLobbyEvent);
+	std::string data = eventToString(createLobbyEvent);
 
 	// debug print the json string
-	std::cout << j << std::endl;
+	std::cout << data << std::endl;
 
 	// reform the event from the json string
-	Event* e = eventFromString(j, evRegister);
+	Event* e = eventFromString(data, evRegister);
 	
 	// inform the listener that we've got an event
 	evListener.onEventRecv(e);
