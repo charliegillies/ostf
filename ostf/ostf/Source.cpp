@@ -58,11 +58,9 @@ int main()
 
 	// reform the event from the json string
 	Event* e = EventSerializer::deserialize(data);
-	
+
 	// inform the listener that we've got an event
 	evListener.onEventRecv(e);
-
-	system("pause");
 
 	delete e;
 	return 0;

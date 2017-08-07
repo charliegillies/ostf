@@ -48,7 +48,8 @@ ostf::Buffer & ostf::JsonBuffer::create_child(std::string c)
 	// now we create an internal json buffer to match the one we already have
 	// and give that the reference to the json child we just created
 	auto b = new JsonBuffer(_jsonBuffer[c]);
-	_buffer.insert_or_assign(c, b);
+	//_buffer.insert_or_assign(c, b);
+	_buffer[c] = b;
 
 	return read_child(c);
 }
