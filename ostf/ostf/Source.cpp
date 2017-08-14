@@ -12,20 +12,23 @@ int main(int argc, char* argv[])
 {
 	// ensure that we have one argument
 	// keep in mind that the first argument passed is the program name
-	if(argc != 2) {
-		std::cout << "A command line argument of 'server' or 'client' is required. Program exiting." << '\n';
+	if(argc != 3) {
+		std::cout << "Command line arguments (client/server) and an ip address are required." << '\n';
 		return -1;
 	}
 
-	// get the second argument
-	std::string appArg = argv[1];
-	Application* app = nullptr;
+	// get the second arg (client/server) & third arg (bind address)
+	std::string appArg 	= argv[1];
+	std::string address = argv[2];
+	Application* app	  = nullptr;
+
+	//TODO somehow ensure address validation
 
 	if(appArg == "server") {
-		app = new ServerApp();
+		app = new ServerApp(address);
 	}
 	else if(appArg == "client") {
-		app = new ClientApp();
+		app = new ClientApp(address);
 	}
 	else {
 		std::cout << "Incorrect cmd arg: '" << appArg << "' was passed. Arg 'client' or 'server' was expected." << '\n';
