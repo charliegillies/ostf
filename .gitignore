@@ -2,6 +2,7 @@
 
 ## Generated files from the Makefile
 *.o
+*.exe
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and

@@ -1,5 +1,9 @@
 #include "ServerApp.h"
-#include <czmq.h>
+#include <zmq.hpp>
+
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 ostf::ServerApp::ServerApp(std::string address)
 {
@@ -8,14 +12,21 @@ ostf::ServerApp::ServerApp(std::string address)
 
 void ostf::ServerApp::run()
 {
-  std::cout << "Server Application - Start" << '\n';
+  zmq::context_t context(1);
+  zmq::socket_t socket(context, ZMQ_REP);
+  socket.bind("tcp://*:5555");
 
-  // We want to wait for clients to connect to us
-  zsock_t* pull = zsock_new_pull(_ip.c_str());
+  while(true) {
+    zmq::message_t request;
 
-  char* str = zstr_recv(pull);
-  puts(str);
-  zstr_free(&str);
+    socket.recv(&request);
+    std::cout << "Received Hello" << std::endl;
 
-  zsock_destroy(&pull);
+    sleep(1);
+
+    zmq::message_t reply(5);
+    memcpy(reply.data(), "World", 5);
+    socket.send(reply);
+  }
+
 }

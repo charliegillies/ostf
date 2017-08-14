@@ -1,5 +1,7 @@
 #include "ClientApp.h"
-#include <czmq.h>
+#include <zmq.hpp>
+
+#include <cassert>
 
 ostf::ClientApp::ClientApp(std::string address)
 {
@@ -8,12 +10,23 @@ ostf::ClientApp::ClientApp(std::string address)
 
 void ostf::ClientApp::run()
 {
-  std::cout << "Client Application - Start" << '\n';
+  zmq::context_t context;
+  zmq::socket_t socket(context, ZMQ_REQ);
 
-  // We want to connect to the server
-  zsock_t* push = zsock_new_push(_ip.c_str());
+  std::cout << "Connecting to the Hello World server." << '\n';
+  socket.connect(_ip.c_str());
 
-  zstr_send(push, "Hello, World");
+  for(int i = 0; i < 10; ++i)
+  {
+    zmq::message_t request(5);
+    memcpy(request.data(), "Hello", 5);
 
-  zsock_destroy(&push);
+    std::cout << "Sending hello.. " << i << "..." << '\n';
+    socket.send(request);
+
+    zmq::message_t reply;
+    socket.recv(&reply);
+    std::cout << "Received World " << i << '\n';
+  }
+
 }

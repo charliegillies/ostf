@@ -5,6 +5,7 @@
 #include "apps/ServerApp.h"
 
 #include <iostream>
+#include "czmq.h"
 
 using namespace ostf;
 
@@ -22,13 +23,15 @@ int main(int argc, char* argv[])
 	std::string address = argv[2];
 	Application* app	  = nullptr;
 
-	//TODO somehow ensure address validation
+	address = "@tcp://" + address + ":5560";
 
 	if(appArg == "server") {
 		app = new ServerApp(address);
+		std::cout << "Server application initialized: " << address << '\n';
 	}
 	else if(appArg == "client") {
 		app = new ClientApp(address);
+		std::cout << "Client application initialized: " << address << '\n';
 	}
 	else {
 		std::cout << "Incorrect cmd arg: '" << appArg << "' was passed. Arg 'client' or 'server' was expected." << '\n';
