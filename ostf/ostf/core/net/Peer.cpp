@@ -9,6 +9,6 @@ namespace ostf
 
 	void ostf::Peer::setup()
 	{
-
+			
 	}
 }

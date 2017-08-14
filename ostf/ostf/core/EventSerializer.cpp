@@ -20,7 +20,7 @@ std::string ostf::EventSerializer::serialize(Event* ev)
 	ostf::JsonBuffer buffer{ jsonObj };
 
 	ev->write(buffer);
-	return jsonObj.dump();
+	return jsonObj.dump(4);
 }
 
 ostf::Event* ostf::EventSerializer::deserialize(std::string eventData)
@@ -32,7 +32,7 @@ ostf::Event* ostf::EventSerializer::deserialize(std::string eventData)
 	nlohmann::json jsonObj = nlohmann::json::parse(eventData);
 	ostf::JsonBuffer buffer{ jsonObj };
 
-	// create an event from the string 
+	// create an event from the string
 	Event* e = _evRegister->createEvent(buffer);
 	assert(e != nullptr);
 

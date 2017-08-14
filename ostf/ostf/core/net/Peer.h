@@ -9,14 +9,12 @@ namespace ostf
 	*/
 	class Peer
 	{
-	private:
-
-
 	public:
 		Peer();
 
+		/*
+		*
+		*/
 		virtual void setup();
-
-
 	};
 }
