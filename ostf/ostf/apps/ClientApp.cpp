@@ -13,7 +13,7 @@ void ostf::ClientApp::run()
   zmq::context_t context;
   zmq::socket_t socket(context, ZMQ_REQ);
 
-  std::cout << "Connecting to the Hello World server." << '\n';
+  std::cout << "Connecting to the Hello World server at " << _ip.c_str() << '\n';
   socket.connect(_ip.c_str());
 
   for(int i = 0; i < 10; ++i)

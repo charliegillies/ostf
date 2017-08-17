@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 	std::string address = argv[2];
 	Application* app	  = nullptr;
 
-	address = "@tcp://" + address + ":5560";
+	address = "tcp://" + address + ":5560";
 
 	if(appArg == "server") {
 		app = new ServerApp(address);
