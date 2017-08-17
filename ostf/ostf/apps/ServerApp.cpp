@@ -15,9 +15,8 @@ void ostf::ServerApp::run()
   zmq::context_t context(1);
   zmq::socket_t socket(context, ZMQ_REP);
 
-  char* ip = _ip.c_str();
-  std::cout << "ServerApp - attempting bind on ip " << ip << '\n';
-  socket.bind(ip);
+  std::cout << "ServerApp - attempting bind on ip " << _ip.c_str() << '\n';
+  socket.bind(_ip.c_str());
   std::cout << "Bind passed." << '\n';
 
   while(true) {
