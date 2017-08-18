@@ -22,8 +22,9 @@ void ostf::ServerApp::run()
   while(true) {
     zmq::message_t request;
 
+    std::cout << "Waiting for Hello.." << '\n';
     socket.recv(&request);
-    std::cout << "Received Hello" << std::endl;
+    std::cout << "Received Hello. Replying.." << std::endl;
 
     sleep(1);
 

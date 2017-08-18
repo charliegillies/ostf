@@ -10,7 +10,7 @@ ostf::ClientApp::ClientApp(std::string address)
 
 void ostf::ClientApp::run()
 {
-  zmq::context_t context;
+  zmq::context_t context(1);
   zmq::socket_t socket(context, ZMQ_REQ);
 
   std::cout << "Connecting to the Hello World server at " << _ip.c_str() << '\n';
